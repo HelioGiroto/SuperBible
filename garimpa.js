@@ -2,7 +2,7 @@ let livro, script, txt, listaGarimpada, versiculosTexto, textoFinal, botaoPressi
 let bibliaSelecionada = []
 let listaStrong = []
 let listaMorph = []
-
+ 
 // cria se não exista uma lista no web Storage caso o usuário queira salvar a lista de versículos garimpados:
 if (localStorage.getItem("listaVersiculos") == null || !localStorage.listaVersiculos) {
     localStorage.setItem("listaVersiculos", "[]")
