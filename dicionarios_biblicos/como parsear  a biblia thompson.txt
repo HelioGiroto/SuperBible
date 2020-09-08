@@ -1,0 +1,102 @@
+COMO PARSEAR A BÍBLIA THOMPSON XML - Modelo Zefania:
+
+0. PARSEAR DE VARIÁVEL EXTERNA PARA DENTRO DO HTML/JS:
+
+texto = '<item id="ABOMINATIONS"> <description>things hateful to God-</description> <reflink target="5;7;25">De 7:25</reflink> <reflink target="5;18;12">18:12</reflink> <reflink target="5;25;16">25:16</reflink><reflink target="20;6;16">Pr 6:16</reflink> ; <reflink target="20;11;20">11:20</reflink> ; <reflink target="20;12;22">12:22</reflink> ; <reflink target="20;21;27">21:27</reflink> ; <reflink target="20;28;9">28:9</reflink> ; <reflink target="42;16;15">Lu 16:15</reflink> /item>'
+xmlDoc = parser.parseFromString(texto,"text/xml")
+xmlDoc.querySelector('#ABOMINATIONS').children[2].innerHTML
+
+
+///////////////////////////////////////////////////////////
+
+	// Livro Cap:Vers
+	document.querySelectorAll('reflink[target="1;1;1"]')[0].innerHTML
+
+1. PROCURAR OS TEMAS E REFERÊNCIAS RELACIONADAS COM UM CERTO VERSÍCULO:
+	(Neste caso, pode abrir paralelamente como o TSK ou qquer outro comentário)
+
+// quantos temas tem relacionados a Gn 1:1 :
+document.querySelectorAll('reflink[target="1;1;1"]').length
+
+// Pega só o nome do tema:
+document.querySelectorAll('reflink[target="1;1;1"]')[0].parentNode.id
+
+	// Pega o tema (#1) que está relacionado com este vs:
+	document.querySelectorAll('reflink[target="1;1;1"]')[0].parentNode
+
+	// Quantos sub-temas tem este tema:
+	document.querySelectorAll('reflink[target="1;1;1"]')[0].parentNode.querySelectorAll('description').length
+
+	// Nomes dos sub-temas:
+	document.querySelectorAll('reflink[target="1;1;1"]')[0].parentNode.querySelectorAll('description')[0].innerHTML
+
+
+// Quantas linhas (entre sub-temas + versículos) estao dentro deste tema:
+document.querySelectorAll('reflink[target="1;1;1"]')[0].parentNode.childElementCount
+
+// Começa a pegar os textos destas linhas conforme tamanho total (ver acima):
+document.querySelectorAll('reflink[target="1;1;1"]')[0].parentNode.children[0].innerHTML
+document.querySelectorAll('reflink[target="1;1;1"]')[0].parentNode.children[1].innerHTML
+document.querySelectorAll('reflink[target="1;1;1"]')[0].parentNode.children[...].innerHTML
+
+	// Ver neste caso:
+	document.querySelectorAll('reflink[target="1;1;1"]')[0].parentNode.children[19].innerHTML
+	// terá que manipular o texto, tirando as tags...(um replace no texto geral/final) 
+
+// Todos os tópicos desta passagem:
+topicos = document.querySelectorAll('reflink[target="1;18;23"]')[0].parentNode.children
+for (a=0; a<topicos.length; a++){console.log(topicos[a].innerHTML)}
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
+2. PROCURAR POR UM TEMA ESPECÍFICO - QUAIS VERSÍCULOS ESTÃO RELACIONADOS A ELE:
+
+// Quantas linhas (sub-temas + vers) tem relacionado ao tema: ABEL:
+document.querySelector('#ABEL').childElementCount
+
+// Pega a primeira linha:
+document.querySelector('#ABEL').children[0].innerHTML
+
+// Pega todas as linhas: (forEach não funciona):
+for (a=0; a<elems.length; a++){console.log(elems[a].innerHTML)}
+
+	// outro exemplo com nome de id com espaços:
+
+	elems = document.querySelector('#ABRAHAM\\ OR\\ ABRAM').children
+	for (a=0; a<elems.length; a++){console.log(elems[a].innerHTML)}
+
+
+	// quando aparece os versículos assim: Joh 6:62, 20:17 = Sign: Joh 20:17 (o livro da ref. ant.).
+
+
+////////////////////////////////////////////////////////////////////////////////////////////
+
+3. NOMES DE TODOS OS ITEMS / TEMAS:
+todosItens = document.querySelectorAll('item')
+for (a=0; a<todosItens.length; a++){console.log(todosItens[a].id)}
+
+todosItens.forEach(a=> (console.log(a.id)))
+
+////////////////////////////////////////////////////////////////////////////////////////////
+
+
+NO XML MORPHOLOGICAL ROBINSON
+
+// Para encontrar a morfosintaxe de uma palavra:
+document.querySelector('#V-PNP-ASN').childElementCount
+document.querySelector('#V-PNP-ASN').querySelectorAll('description').forEach(a=> console.log(a.innerHTML))
+morfo = document.querySelector('#V-PNP-ASN').querySelectorAll('description').forEach(a=> console.log(a.innerHTML))
+
+	// document.querySelector('#A-ASM-C').children[1].innerHTML
+
+// ou
+significado = []
+document.querySelector('#X-NSF').querySelectorAll('description').forEach(a=> significado.push(a.innerHTML))
+
+
+
+
+
+
