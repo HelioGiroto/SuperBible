@@ -1,0 +1,13 @@
+# mudanças na bibliaHB
+	- ver Rut_2:1k e Rt 2:1q
+
+
+# Após chamar versículos
+	tenta colocar outro unico - aceita
+	tenta colocar outro com c:v-v - NAO aceita
+
+# Tenta solicitar esses (erro):
+	Mc 16:16
+	Jo 3:14-16
+	Gn 1:1-4
+	Ap 12:12
